@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from 'react';
+import Header from '@/components/Header';
+import HomeSection from '@/components/HomeSection';
+import ContactsSection from '@/components/ContactsSection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('home');
+
+  const handleSectionChange = (section: string) => {
+    setActiveSection(section);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header activeSection={activeSection} onSectionChange={handleSectionChange} />
+      
+      <main className="flex-grow relative">
+        <HomeSection isActive={activeSection === 'home'} />
+        <ContactsSection isActive={activeSection === 'contacts'} />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
