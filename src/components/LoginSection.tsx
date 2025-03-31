@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -22,8 +22,8 @@ interface LoginSectionProps {
   isActive: boolean;
 }
 
-const LoginSection = ({ isActive }: LoginSectionProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+const LoginSection: React.FC<LoginSectionProps> = ({ isActive }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
