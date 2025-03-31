@@ -56,8 +56,8 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive }) => {
   return (
     <section 
       className={cn(
-        "absolute inset-0 w-full min-h-screen pt-32 opacity-0 pointer-events-none transition-opacity duration-500",
-        isActive && "opacity-100 pointer-events-auto"
+        "fixed inset-0 w-full min-h-screen pt-32 transition-all duration-500 transform",
+        isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
       <div className="max-w-md mx-auto px-6 md:px-0">

@@ -19,8 +19,8 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
   return (
     <section 
       className={cn(
-        "min-h-screen pt-24 px-6 md:px-12 transition-opacity duration-500",
-        isActive ? "opacity-100" : "opacity-0 pointer-events-none absolute"
+        "fixed inset-0 w-full min-h-screen pt-24 px-6 md:px-12 transition-all duration-500 transform",
+        isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
       <div className="max-w-7xl mx-auto">
