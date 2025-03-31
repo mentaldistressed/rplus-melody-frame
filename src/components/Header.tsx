@@ -47,6 +47,15 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
           >
             Контакты
           </button>
+          <button
+            onClick={() => handleNavigation('login')}
+            className={cn(
+              "link-underline text-sm uppercase tracking-wider font-medium",
+              activeSection === 'login' ? "opacity-100" : "opacity-70 hover:opacity-100"
+            )}
+          >
+            Войти
+          </button>
         </nav>
 
         {/* Mobile menu button */}
@@ -93,6 +102,15 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
             )}
           >
             Контакты
+          </button>
+          <button
+            onClick={() => handleNavigation('login')}
+            className={cn(
+              "text-left text-lg transition-all",
+              activeSection === 'login' ? "font-medium" : "opacity-70"
+            )}
+          >
+            Войти
           </button>
         </div>
       </div>
