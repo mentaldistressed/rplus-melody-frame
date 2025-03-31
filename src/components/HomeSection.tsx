@@ -79,49 +79,6 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
             </div>
           </div>
         </div>
-        
-        <div 
-          className={cn(
-            "mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 opacity-0",
-            isLoaded && "animate-fade-in animate-delay-500"
-          )}
-        >
-          {[
-            {
-              title: "Музыка",
-              description: "Электронная музыка разных стилей и направлений"
-            },
-            {
-              title: "Релизы",
-              description: "Регулярные выпуски новых альбомов и синглов"
-            },
-            {
-              title: "Артисты",
-              description: "Талантливые музыканты со всего мира"
-            }
-          ].map((item, index) => (
-            <div key={index} className="p-8 rounded-lg border bg-white shadow-sm hover:shadow-md hover:bg-secondary/10 transition-all">
-              <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
-              
-              {index === 2 && (
-                <div className="mt-4 flex items-center space-x-2 text-sm text-muted-foreground">
-                  <span>Spotify</span>
-                  <span>•</span>
-                  <span>SoundCloud</span>
-                  <span>•</span>
-                  <span>Bandcamp</span>
-                </div>
-              )}
-              
-              {index === 0 && (
-                <div className="mt-4 text-sm text-muted-foreground">
-                  © 2025 rplus. Все права защищены.
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
