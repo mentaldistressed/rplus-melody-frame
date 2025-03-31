@@ -100,9 +100,25 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               description: "Талантливые музыканты со всего мира"
             }
           ].map((item, index) => (
-            <div key={index} className="p-8 rounded-lg border hover:bg-secondary/50 transition-colors">
-              <h3 className="text-xl font-medium mb-3">{item.title}</h3>
+            <div key={index} className="p-8 rounded-lg border bg-white shadow-sm hover:shadow-md hover:bg-secondary/10 transition-all">
+              <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
               <p className="text-muted-foreground">{item.description}</p>
+              
+              {index === 2 && (
+                <div className="mt-4 flex items-center space-x-2 text-sm text-muted-foreground">
+                  <span>Spotify</span>
+                  <span>•</span>
+                  <span>SoundCloud</span>
+                  <span>•</span>
+                  <span>Bandcamp</span>
+                </div>
+              )}
+              
+              {index === 0 && (
+                <div className="mt-4 text-sm text-muted-foreground">
+                  © 2025 rplus. Все права защищены.
+                </div>
+              )}
             </div>
           ))}
         </div>

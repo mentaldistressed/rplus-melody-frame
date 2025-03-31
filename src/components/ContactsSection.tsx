@@ -51,7 +51,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
         >
           <a 
             href="mailto:info@rpluslabel.com" 
-            className="block p-8 rounded-lg border hover:bg-secondary/50 transition-all hover:-translate-y-1 group"
+            className="block p-8 rounded-lg border bg-white shadow-sm hover:shadow-md hover:bg-secondary/10 transition-all hover:-translate-y-1 group"
           >
             <div className="flex items-center space-x-4 mb-4">
               <div className="p-3 rounded-full bg-accent group-hover:bg-accent-foreground group-hover:text-white transition-colors">
@@ -67,7 +67,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
             href="https://t.me/rpluslabel" 
             target="_blank"
             rel="noopener noreferrer" 
-            className="block p-8 rounded-lg border hover:bg-secondary/50 transition-all hover:-translate-y-1 group"
+            className="block p-8 rounded-lg border bg-white shadow-sm hover:shadow-md hover:bg-secondary/10 transition-all hover:-translate-y-1 group"
           >
             <div className="flex items-center space-x-4 mb-4">
               <div className="p-3 rounded-full bg-accent group-hover:bg-accent-foreground group-hover:text-white transition-colors">
