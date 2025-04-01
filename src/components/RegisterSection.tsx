@@ -12,8 +12,8 @@ import { Eye, EyeOff } from 'lucide-react';
 
 // Define form validation schema
 const formSchema = z.object({
-  username: z.string().min(3, {
-    message: "Имя пользователя должно содержать не менее 3 символов.",
+  email: z.string().email({
+    message: "Пожалуйста, введите корректный email.",
   }),
   password: z.string().min(6, {
     message: "Пароль должен содержать не менее 6 символов.",
@@ -41,7 +41,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
       confirmPassword: "",
     },
@@ -52,7 +52,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
     setIsLoading(true);
     
     try {
-      const success = register(values.username, values.password);
+      const success = await register(values.email, values.password);
       
       if (success) {
         form.reset();
@@ -82,13 +82,14 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Имя пользователя</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Введите имя пользователя" 
+                        placeholder="Введите ваш email" 
+                        type="email"
                         {...field} 
                         disabled={isLoading} 
                       />

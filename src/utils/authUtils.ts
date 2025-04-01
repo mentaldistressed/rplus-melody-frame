@@ -1,127 +1,185 @@
 
 import { User } from "@/types/user";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
-// Ключ для хранения пользователей в localStorage
-const USERS_STORAGE_KEY = 'rplus_users';
-const CURRENT_USER_KEY = 'rplus_current_user';
-
-// Получение списка всех пользователей из localStorage
-export const getUsers = (): User[] => {
-  const users = localStorage.getItem(USERS_STORAGE_KEY);
-  return users ? JSON.parse(users) : [];
-};
-
-// Добавление нового пользователя
-export const createUser = (username: string, password: string): User | null => {
-  const users = getUsers();
-  
-  // Проверяем, существует ли пользователь с таким именем
-  if (users.some(user => user.username === username)) {
+// Аутентификация пользователя через Supabase
+export const authenticateUser = async (email: string, password: string): Promise<User | null> => {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    
+    if (error) throw error;
+    
+    if (data.user) {
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', data.user.id)
+        .single();
+        
+      if (userError) throw userError;
+      
+      return {
+        id: userData.id,
+        username: userData.username,
+        createdAt: userData.created_at
+      };
+    }
+    return null;
+  } catch (error) {
+    console.error("Error authenticating user:", error);
     return null;
   }
-
-  // Создаем нового пользователя
-  const newUser: User = {
-    id: generateId(),
-    username,
-    password, // В реальном приложении пароли нужно хранить в хешированном виде
-    createdAt: new Date().toISOString()
-  };
-
-  // Добавляем пользователя в список и сохраняем в localStorage
-  users.push(newUser);
-  localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
-
-  return newUser;
 };
 
-// Аутентификация пользователя
-export const authenticateUser = (username: string, password: string): User | null => {
-  const users = getUsers();
-  const user = users.find(u => u.username === username && u.password === password);
-  
-  if (user) {
-    // Сохраняем текущего пользователя в localStorage
-    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+// Создание нового пользователя
+export const createUser = async (email: string, password: string): Promise<User | null> => {
+  try {
+    // Регистрация пользователя в системе аутентификации Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          username: email.split('@')[0], // Используем часть email как username по умолчанию
+        }
+      }
+    });
+
+    if (error) throw error;
+    
+    if (data.user) {
+      // Пользователь будет создан в таблице users автоматически через триггер
+      return {
+        id: data.user.id,
+        username: email.split('@')[0],
+        createdAt: new Date().toISOString()
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return null;
   }
-  
-  return user;
 };
 
 // Получение текущего аутентифицированного пользователя
-export const getCurrentUser = (): User | null => {
-  const userJson = localStorage.getItem(CURRENT_USER_KEY);
-  return userJson ? JSON.parse(userJson) : null;
+export const getCurrentUser = async (): Promise<User | null> => {
+  try {
+    const { data } = await supabase.auth.getSession();
+    
+    if (data.session?.user) {
+      const { data: userData, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', data.session.user.id)
+        .single();
+        
+      if (error) throw error;
+      
+      return {
+        id: userData.id,
+        username: userData.username,
+        createdAt: userData.created_at
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error("Error getting current user:", error);
+    return null;
+  }
 };
 
 // Выход из аккаунта
-export const logoutUser = (): void => {
-  localStorage.removeItem(CURRENT_USER_KEY);
-};
-
-// Генерация уникального ID
-const generateId = (): string => {
-  return Math.random().toString(36).substring(2, 15) + 
-         Math.random().toString(36).substring(2, 15);
+export const logoutUser = async (): Promise<void> => {
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    console.error("Error logging out:", error);
+  }
 };
 
 // React хук для работы с авторизацией
 export const useAuth = () => {
   const { toast } = useToast();
   
-  const login = (username: string, password: string): boolean => {
-    const user = authenticateUser(username, password);
-    
-    if (user) {
-      toast({
-        title: "Вход выполнен успешно",
-        description: `Добро пожаловать, ${username}!`
-      });
-      return true;
-    } else {
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const user = await authenticateUser(email, password);
+      
+      if (user) {
+        toast({
+          title: "Вход выполнен успешно",
+          description: `Добро пожаловать, ${user.username}!`
+        });
+        return true;
+      } else {
+        toast({
+          title: "Ошибка входа",
+          description: "Неверный email или пароль",
+          variant: "destructive"
+        });
+        return false;
+      }
+    } catch (error) {
       toast({
         title: "Ошибка входа",
-        description: "Неверное имя пользователя или пароль",
+        description: error instanceof Error ? error.message : "Произошла неизвестная ошибка",
         variant: "destructive"
       });
       return false;
     }
   };
   
-  const register = (username: string, password: string): boolean => {
-    const user = createUser(username, password);
-    
-    if (user) {
-      toast({
-        title: "Регистрация успешна",
-        description: "Вы можете войти в свой аккаунт"
-      });
-      return true;
-    } else {
+  const register = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const user = await createUser(email, password);
+      
+      if (user) {
+        toast({
+          title: "Регистрация успешна",
+          description: "Вы можете войти в свой аккаунт"
+        });
+        return true;
+      } else {
+        toast({
+          title: "Ошибка регистрации",
+          description: "Пользователь с таким email уже существует",
+          variant: "destructive"
+        });
+        return false;
+      }
+    } catch (error) {
       toast({
         title: "Ошибка регистрации",
-        description: "Пользователь с таким именем уже существует",
+        description: error instanceof Error ? error.message : "Произошла неизвестная ошибка",
         variant: "destructive"
       });
       return false;
     }
   };
   
-  const logout = (): void => {
-    logoutUser();
+  const logout = async (): Promise<void> => {
+    await logoutUser();
     toast({
       title: "Выход выполнен",
       description: "Вы вышли из своего аккаунта"
     });
   };
   
-  const isAuthenticated = (): boolean => {
-    return !!getCurrentUser();
+  const isAuthenticated = async (): Promise<boolean> => {
+    const user = await getCurrentUser();
+    return !!user;
   };
   
-  const getUser = (): User | null => {
-    return getCurrentUser();
+  const getUser = async (): Promise<User | null> => {
+    return await getCurrentUser();
   };
   
   return { login, register, logout, isAuthenticated, getUser };

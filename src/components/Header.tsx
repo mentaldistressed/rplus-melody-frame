@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/utils/authUtils';
 
@@ -18,8 +18,8 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
     setIsMenuOpen(false);
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     handleNavigation('home');
   };
 

@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -12,8 +12,8 @@ import { Eye, EyeOff } from 'lucide-react';
 
 // Define form validation schema
 const formSchema = z.object({
-  username: z.string().min(3, {
-    message: "Имя пользователя должно содержать не менее 3 символов.",
+  email: z.string().email({
+    message: "Пожалуйста, введите корректный email.",
   }),
   password: z.string().min(6, {
     message: "Пароль должен содержать не менее 6 символов.",
@@ -26,33 +26,49 @@ interface LoginSectionProps {
 }
 
 const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const { login, isAuthenticated, logout } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ username: string } | null>(null);
+  const { login, isAuthenticated, logout, getUser } = useAuth();
 
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
   // Check if user is already authenticated
   useEffect(() => {
-    // Nothing to do on initial render, just let the form be ready
-  }, []);
+    const checkAuth = async () => {
+      const authenticated = await isAuthenticated();
+      setIsUserAuthenticated(authenticated);
+      
+      if (authenticated) {
+        const user = await getUser();
+        setCurrentUser(user);
+      }
+    };
+    
+    checkAuth();
+  }, [isAuthenticated, getUser]);
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     
     try {
-      const success = login(values.username, values.password);
+      const success = await login(values.email, values.password);
       
       if (success) {
         form.reset();
+        // Обновляем состояние аутентификации
+        setIsUserAuthenticated(true);
+        const user = await getUser();
+        setCurrentUser(user);
         // Redirect to home page after successful login
         onSectionChange('home');
       }
@@ -63,8 +79,14 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
 
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
+  const handleLogout = async () => {
+    await logout();
+    setIsUserAuthenticated(false);
+    setCurrentUser(null);
+  };
+
   // If user is already authenticated, show profile info instead of login form
-  if (isAuthenticated()) {
+  if (isUserAuthenticated && currentUser) {
     return (
       <section 
         className={cn(
@@ -82,14 +104,11 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
             <div className="flex flex-col space-y-6">
               <div>
                 <p className="text-sm text-muted-foreground">Имя пользователя</p>
-                <p className="font-medium">{isAuthenticated() ? getCurrentUser()?.username : ''}</p>
+                <p className="font-medium">{currentUser.username}</p>
               </div>
               
               <Button 
-                onClick={() => {
-                  logout();
-                  form.reset();
-                }}
+                onClick={handleLogout}
                 variant="outline"
               >
                 Выйти из аккаунта
@@ -119,13 +138,14 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Имя пользователя</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Введите имя пользователя" 
+                        placeholder="Введите ваш email" 
+                        type="email"
                         {...field} 
                         disabled={isLoading} 
                       />
@@ -195,9 +215,3 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
 };
 
 export default LoginSection;
-
-// Helper function to get current user, imported from authUtils
-const getCurrentUser = () => {
-  const userJson = localStorage.getItem('rplus_current_user');
-  return userJson ? JSON.parse(userJson) : null;
-};
