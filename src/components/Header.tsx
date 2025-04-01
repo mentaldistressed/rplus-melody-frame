@@ -1,18 +1,26 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/utils/authUtils';
 
 interface HeaderProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
+  isAuthenticated: boolean;
 }
 
-const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
+const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logout } = useAuth();
 
   const handleNavigation = (section: string) => {
     onSectionChange(section);
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleNavigation('home');
   };
 
   return (
@@ -47,15 +55,25 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
           >
             Контакты
           </button>
-          <button
-            onClick={() => handleNavigation('login')}
-            className={cn(
-              "link-underline text-sm uppercase tracking-wider font-medium",
-              activeSection === 'login' ? "opacity-100" : "opacity-70 hover:opacity-100"
-            )}
-          >
-            Войти
-          </button>
+          
+          {isAuthenticated ? (
+            <button
+              onClick={handleLogout}
+              className="link-underline text-sm uppercase tracking-wider font-medium opacity-70 hover:opacity-100"
+            >
+              Выйти
+            </button>
+          ) : (
+            <button
+              onClick={() => handleNavigation('login')}
+              className={cn(
+                "link-underline text-sm uppercase tracking-wider font-medium",
+                activeSection === 'login' || activeSection === 'register' ? "opacity-100" : "opacity-70 hover:opacity-100"
+              )}
+            >
+              Войти
+            </button>
+          )}
         </nav>
 
         {/* Mobile menu button */}
@@ -103,15 +121,25 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
           >
             Контакты
           </button>
-          <button
-            onClick={() => handleNavigation('login')}
-            className={cn(
-              "text-left text-lg transition-all",
-              activeSection === 'login' ? "font-medium" : "opacity-70"
-            )}
-          >
-            Войти
-          </button>
+          
+          {isAuthenticated ? (
+            <button
+              onClick={handleLogout}
+              className="text-left text-lg transition-all opacity-70"
+            >
+              Выйти
+            </button>
+          ) : (
+            <button
+              onClick={() => handleNavigation('login')}
+              className={cn(
+                "text-left text-lg transition-all",
+                activeSection === 'login' || activeSection === 'register' ? "font-medium" : "opacity-70"
+              )}
+            >
+              Войти
+            </button>
+          )}
         </div>
       </div>
     </header>

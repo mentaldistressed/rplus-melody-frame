@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -18,17 +18,24 @@ const formSchema = z.object({
   password: z.string().min(6, {
     message: "Пароль должен содержать не менее 6 символов.",
   }),
+  confirmPassword: z.string().min(6, {
+    message: "Пароль должен содержать не менее 6 символов.",
+  }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Пароли не совпадают",
+  path: ["confirmPassword"],
 });
 
-interface LoginSectionProps {
+interface RegisterSectionProps {
   isActive: boolean;
   onSectionChange: (section: string) => void;
 }
 
-const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }) => {
+const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionChange }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-  const { login, isAuthenticated, logout } = useAuth();
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const { register } = useAuth();
 
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,70 +43,26 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
     defaultValues: {
       username: "",
       password: "",
+      confirmPassword: "",
     },
   });
-
-  // Check if user is already authenticated
-  useEffect(() => {
-    // Nothing to do on initial render, just let the form be ready
-  }, []);
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     
     try {
-      const success = login(values.username, values.password);
+      const success = register(values.username, values.password);
       
       if (success) {
         form.reset();
-        // Redirect to home page after successful login
-        onSectionChange('home');
+        // Redirect to login page after successful registration
+        onSectionChange('login');
       }
     } finally {
       setIsLoading(false);
     }
   };
-
-  const toggleShowPassword = () => setShowPassword(!showPassword);
-
-  // If user is already authenticated, show profile info instead of login form
-  if (isAuthenticated()) {
-    return (
-      <section 
-        className={cn(
-          "fixed inset-0 w-full min-h-screen pt-32 transition-all duration-500 transform",
-          isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
-        )}
-      >
-        <div className="max-w-md mx-auto px-6 md:px-0">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 animate-fade-in">Профиль</h1>
-          <p className="text-muted-foreground mb-8 animate-fade-in animate-delay-100">
-            Вы вошли в систему
-          </p>
-          
-          <div className="border rounded-lg p-6 mb-8 animate-fade-in animate-delay-200">
-            <div className="flex flex-col space-y-6">
-              <div>
-                <p className="text-sm text-muted-foreground">Имя пользователя</p>
-                <p className="font-medium">{isAuthenticated() ? getCurrentUser()?.username : ''}</p>
-              </div>
-              
-              <Button 
-                onClick={() => {
-                  logout();
-                  form.reset();
-                }}
-                variant="outline"
-              >
-                Выйти из аккаунта
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section 
@@ -109,9 +72,9 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
       )}
     >
       <div className="max-w-md mx-auto px-6 md:px-0">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 animate-fade-in">Вход</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 animate-fade-in">Регистрация</h1>
         <p className="text-muted-foreground mb-8 animate-fade-in animate-delay-100">
-          Войдите в свою учетную запись rplus
+          Создайте новую учетную запись rplus
         </p>
         
         <div className="border rounded-lg p-6 mb-8 animate-fade-in animate-delay-200">
@@ -144,7 +107,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
                     <FormControl>
                       <div className="relative">
                         <Input 
-                          type={showPassword ? "text" : "password"}
+                          type={showPassword ? "text" : "password"} 
                           placeholder="Введите пароль" 
                           {...field}
                           disabled={isLoading}
@@ -153,10 +116,40 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
                         <button 
                           type="button"
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                          onClick={toggleShowPassword}
+                          onClick={() => setShowPassword(!showPassword)}
                           tabIndex={-1}
                         >
                           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Подтверждение пароля</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input 
+                          type={showConfirmPassword ? "text" : "password"} 
+                          placeholder="Повторите пароль" 
+                          {...field}
+                          disabled={isLoading}
+                          className="pr-10"
+                        />
+                        <button 
+                          type="button"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          tabIndex={-1}
+                        >
+                          {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                         </button>
                       </div>
                     </FormControl>
@@ -170,23 +163,23 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? "Выполняется вход..." : "Войти"}
+                {isLoading ? "Создание аккаунта..." : "Зарегистрироваться"}
               </Button>
             </form>
           </Form>
         </div>
         
         <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
-          У вас нет учетной записи?{" "}
+          У вас уже есть аккаунт?{" "}
           <a 
             href="#" 
             className="text-primary underline-offset-4 hover:underline"
             onClick={(e) => {
               e.preventDefault();
-              onSectionChange('register');
+              onSectionChange('login');
             }}
           >
-            Зарегистрироваться
+            Войти
           </a>
         </p>
       </div>
@@ -194,10 +187,4 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
   );
 };
 
-export default LoginSection;
-
-// Helper function to get current user, imported from authUtils
-const getCurrentUser = () => {
-  const userJson = localStorage.getItem('rplus_current_user');
-  return userJson ? JSON.parse(userJson) : null;
-};
+export default RegisterSection;
