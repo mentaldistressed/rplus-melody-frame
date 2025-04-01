@@ -2,17 +2,15 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HomeSection from '@/components/HomeSection';
-import ContactsSection from '@/components/ContactsSection';
-import LoginSection from '@/components/LoginSection';
-import RegisterSection from '@/components/RegisterSection';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/utils/authUtils';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Проверяем состояние аутентификации при загрузке страницы
@@ -45,28 +43,25 @@ const Index = () => {
   }, [isAuthenticated]);
 
   const handleSectionChange = (section: string) => {
-    setActiveSection(section);
+    if (section === 'contacts') {
+      navigate('/contacts');
+    } else if (section === 'login') {
+      navigate('/login');
+    } else if (section === 'register') {
+      navigate('/register');
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header 
-        activeSection={activeSection} 
+        activeSection="home" 
         onSectionChange={handleSectionChange} 
         isAuthenticated={isUserAuthenticated}
       />
       
       <main className="flex-grow relative">
-        <HomeSection isActive={activeSection === 'home'} />
-        <ContactsSection isActive={activeSection === 'contacts'} />
-        <LoginSection 
-          isActive={activeSection === 'login'} 
-          onSectionChange={handleSectionChange}
-        />
-        <RegisterSection 
-          isActive={activeSection === 'register'} 
-          onSectionChange={handleSectionChange}
-        />
+        <HomeSection isActive={true} />
       </main>
       
       <Footer />

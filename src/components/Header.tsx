@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/utils/authUtils';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   activeSection: string;
@@ -12,15 +13,26 @@ interface HeaderProps {
 const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleNavigation = (section: string) => {
+    if (section === 'home') {
+      navigate('/');
+    } else if (section === 'contacts') {
+      navigate('/contacts');
+    } else if (section === 'login') {
+      navigate('/login');
+    } else if (section === 'register') {
+      navigate('/register');
+    }
+    
     onSectionChange(section);
     setIsMenuOpen(false);
   };
 
   const handleLogout = async () => {
     await logout();
-    handleNavigation('home');
+    navigate('/');
   };
 
   return (
@@ -37,24 +49,24 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <button
-            onClick={() => handleNavigation('home')}
+          <Link
+            to="/"
             className={cn(
               "link-underline text-sm uppercase tracking-wider font-medium",
               activeSection === 'home' ? "opacity-100" : "opacity-70 hover:opacity-100"
             )}
           >
             Главная
-          </button>
-          <button
-            onClick={() => handleNavigation('contacts')}
+          </Link>
+          <Link
+            to="/contacts"
             className={cn(
               "link-underline text-sm uppercase tracking-wider font-medium",
               activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
             )}
           >
             Контакты
-          </button>
+          </Link>
           
           {isAuthenticated ? (
             <button
@@ -64,15 +76,15 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
               Выйти
             </button>
           ) : (
-            <button
-              onClick={() => handleNavigation('login')}
+            <Link
+              to="/login"
               className={cn(
                 "link-underline text-sm uppercase tracking-wider font-medium",
                 activeSection === 'login' || activeSection === 'register' ? "opacity-100" : "opacity-70 hover:opacity-100"
               )}
             >
               Войти
-            </button>
+            </Link>
           )}
         </nav>
 
@@ -103,24 +115,26 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
         isMenuOpen ? "max-h-[300px] border-b border-muted" : "max-h-0"
       )}>
         <div className="p-6 flex flex-col space-y-6">
-          <button
-            onClick={() => handleNavigation('home')}
+          <Link
+            to="/"
             className={cn(
               "text-left text-lg transition-all",
               activeSection === 'home' ? "font-medium" : "opacity-70"
             )}
+            onClick={() => setIsMenuOpen(false)}
           >
             Главная
-          </button>
-          <button
-            onClick={() => handleNavigation('contacts')}
+          </Link>
+          <Link
+            to="/contacts"
             className={cn(
               "text-left text-lg transition-all",
               activeSection === 'contacts' ? "font-medium" : "opacity-70"
             )}
+            onClick={() => setIsMenuOpen(false)}
           >
             Контакты
-          </button>
+          </Link>
           
           {isAuthenticated ? (
             <button
@@ -130,15 +144,16 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
               Выйти
             </button>
           ) : (
-            <button
-              onClick={() => handleNavigation('login')}
+            <Link
+              to="/login"
               className={cn(
                 "text-left text-lg transition-all",
                 activeSection === 'login' || activeSection === 'register' ? "font-medium" : "opacity-70"
               )}
+              onClick={() => setIsMenuOpen(false)}
             >
               Войти
-            </button>
+            </Link>
           )}
         </div>
       </div>
