@@ -17,15 +17,20 @@ const Index = () => {
   useEffect(() => {
     // Проверяем состояние аутентификации при загрузке страницы
     const checkAuth = async () => {
-      const authenticated = await isAuthenticated();
-      setIsUserAuthenticated(authenticated);
+      try {
+        const authenticated = await isAuthenticated();
+        setIsUserAuthenticated(authenticated);
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        setIsUserAuthenticated(false);
+      }
     };
     
     checkAuth();
 
     // Устанавливаем слушатель событий аутентификации
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event) => {
+      (event, session) => {
         if (event === 'SIGNED_IN') {
           setIsUserAuthenticated(true);
         } else if (event === 'SIGNED_OUT') {
