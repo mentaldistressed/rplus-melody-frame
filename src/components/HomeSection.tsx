@@ -1,7 +1,7 @@
 
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useRef } from 'react';
-import { Music } from 'lucide-react';
+import { Music, AlignJustify } from 'lucide-react';
 import LatestReleases from './LatestReleases';
 
 interface HomeSectionProps {
@@ -43,6 +43,14 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
     >
       <div className="px-6 md:px-12 pb-20">
         <div className="max-w-7xl mx-auto">
+          {/* Logo at the top */}
+          <div className="flex justify-center mb-12">
+            <div className="flex items-center">
+              <AlignJustify size={32} className="mr-3" />
+              <span className="text-3xl font-bold uppercase">rplus</span>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-6">

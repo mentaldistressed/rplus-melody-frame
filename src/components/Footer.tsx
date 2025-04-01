@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { Mail, AlignJustify } from 'lucide-react';
+import { Mail, AlignJustify, Facebook, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -37,7 +37,7 @@ const Footer = () => {
               className="hover:opacity-70 transition-opacity"
               aria-label="Instagram"
             >
-              IG
+              <Instagram size={20} />
             </a>
             <a 
               href="mailto:info@rplus.com" 
