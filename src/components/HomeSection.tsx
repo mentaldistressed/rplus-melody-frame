@@ -69,7 +69,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                     isLoaded && "animate-slide-up animate-delay-200"
                   )}
                 >
-                  Создавая музыку будущего.
+                  Лучший музыкальный лейбл
                 </p>
               </div>
               
@@ -79,9 +79,14 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                   isLoaded && "animate-slide-up animate-delay-300"
                 )}
               >
-                <button className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors">
-                  Слушать сейчас
-                </button>
+                <a
+  href="https://rpluslb.ru/contacts"
+  rel="noopener noreferrer"
+  className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors"
+>
+  Связаться с нами
+</a>
+
               </div>
             </div>
             

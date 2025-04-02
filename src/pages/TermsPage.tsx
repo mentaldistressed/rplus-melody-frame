@@ -35,7 +35,7 @@ const TermsPage = () => {
           <h1 className="text-4xl font-bold mb-8">Условия использования</h1>
           
           <div className="prose max-w-none">
-            <p className="mb-4">Последнее обновление: {new Date().toLocaleDateString()}</p>
+            <p className="mb-4">Последнее обновление: 02.04.2025</p>
             
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4">1. Принятие условий</h2>
@@ -74,7 +74,7 @@ const TermsPage = () => {
             
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4">8. Контактная информация</h2>
-              <p>Если у вас есть какие-либо вопросы относительно настоящих Условий использования, пожалуйста, свяжитесь с нами по адресу: info@rplus.com</p>
+              <p>Если у вас есть какие-либо вопросы относительно настоящих Условий использования, пожалуйста, свяжитесь с нами по адресу: info@rpluslb.ru</p>
             </section>
           </div>
         </div>

@@ -21,30 +21,30 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
   const [releases, setReleases] = useState<Release[]>([
     {
       id: '1',
-      title: 'ORTEGA DMT',
-      artist: 'Grant Ortega',
-      releaseDate: '28.03.2025',
-      coverUrl: 'https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&h=500&fit=crop',
+      title: 'ALASKA PUFFER',
+      artist: 'паранойя',
+      releaseDate: '20.12.2024',
+      coverUrl: 'https://i.imgur.com/X5H3JaU.png',
       audioUrl: 'https://filesamples.com/samples/audio/mp3/sample3.mp3',
-      bandLink: 'https://band.link/test'
+      bandLink: 'https://link.rpluslb.ru/alaska_puffer'
     },
     {
       id: '2',
-      title: 'Не скрывай ты от меня',
-      artist: 'erix',
-      releaseDate: '21.03.2025',
-      coverUrl: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&h=500&fit=crop',
+      title: 'распять',
+      artist: 'greyrock, tewiq, madk1d',
+      releaseDate: '14.03.2025',
+      coverUrl: 'https://i.imgur.com/bJBzUFE.png',
       audioUrl: 'https://filesamples.com/samples/audio/mp3/sample1.mp3',
-      bandLink: 'https://band.link/test'
+      bandLink: 'https://link.rpluslb.ru/raspyat'
     },
     {
       id: '3',
-      title: 'idgaf',
-      artist: 'keelpaint',
-      releaseDate: '21.03.2025',
-      coverUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&h=500&fit=crop',
+      title: 'ножи',
+      artist: 'блэйзи?',
+      releaseDate: '21.02.2025',
+      coverUrl: 'https://i.imgur.com/s6IqXSv.png',
       audioUrl: 'https://filesamples.com/samples/audio/mp3/sample2.mp3',
-      bandLink: 'https://band.link/test'
+      bandLink: 'https://link.rpluslb.ru/nozhi_b'
     }
   ]);
 
@@ -55,7 +55,7 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
     )}>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold mb-10 text-center">
-          Последние Релизы
+          Наши релизы
         </h2>
         
         <div className="w-10 h-1 bg-black mx-auto mb-16"></div>

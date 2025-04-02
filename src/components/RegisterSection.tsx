@@ -200,7 +200,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
         </div>
         
         <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
-          У вас уже есть аккаунт?{" "}
+          У Вас уже есть аккаунт?{" "}
           <a 
             href="#" 
             className="text-primary underline-offset-4 hover:underline"

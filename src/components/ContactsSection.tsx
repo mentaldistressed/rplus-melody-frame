@@ -27,7 +27,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
         <div className="space-y-8 max-w-3xl mx-auto">
           <h2 
             className={cn(
-              "text-4xl md:text-6xl font-bold text-center opacity-0",
+              "text-3xl md:text-5xl font-bold text-center opacity-0",
               isLoaded && "animate-slide-up"
             )}
           >
@@ -39,7 +39,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
               isLoaded && "animate-slide-up animate-delay-100"
             )}
           >
-            Свяжитесь с нами, если хотите обсудить сотрудничество или у вас есть вопросы о наших релизах и артистах.
+            Свяжитесь с нами, если хотите обсудить сотрудничество или у Вас есть вопросы.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
           )}
         >
           <p className="text-muted-foreground">
-            Мы находимся в Москве, но работаем с артистами по всему миру.
+            Мы работаем с артистами по всему миру, поэтому связаться с Вами для нас не составит никаких проблем.
           </p>
         </div>
       </div>

@@ -14,11 +14,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div className="flex items-center mb-6 md:mb-0">
             <Logo className="mr-3" size="medium" />
-            <h2 className="text-2xl font-bold uppercase">rplus</h2>
+            <h2 className="text-2xl font-bold">rplus</h2>
           </div>
           
           <div className="text-sm text-gray-600">
-            Создавая музыку будущего.
+            Лучший музыкальный лейбл
           </div>
           
           <div className="flex items-center space-x-6 mt-6 md:mt-0">
@@ -52,7 +52,7 @@ const Footer = () => {
               <MessageCircle size={20} />
             </a>
             <a 
-              href="mailto:info@rplus.com" 
+              href="mailto:info@rpluslb.ru" 
               className="hover:opacity-70 transition-opacity"
               aria-label="Email"
             >
