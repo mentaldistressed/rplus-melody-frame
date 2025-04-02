@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 
+// Новый компонент, который создает анимацию вокруг логотипа
 const AudioEqualizer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -16,49 +17,82 @@ const AudioEqualizer = () => {
     
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius = 100;
-    const barCount = 64;
-    const barWidth = 4;
-    const barMaxHeight = 80;
+    const outerRadius = 120; // Радиус внешней анимации
+    const particleCount = 60; // Количество частиц для анимации
     
+    // Массив частиц для создания эффекта обтекания
+    const particles: {
+      angle: number;
+      radius: number;
+      speed: number;
+      size: number;
+      opacity: number;
+      color: string;
+    }[] = [];
+    
+    // Создаем частицы
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        angle: Math.random() * Math.PI * 2,
+        radius: outerRadius + Math.random() * 20 - 10,
+        speed: 0.002 + Math.random() * 0.002,
+        size: 2 + Math.random() * 3,
+        opacity: 0.3 + Math.random() * 0.4,
+        color: `rgba(0, 0, 0, ${0.2 + Math.random() * 0.3})`
+      });
+    }
+    
+    // Анимационный цикл
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw outer circle
+      // Рисуем внешний круг
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius + barMaxHeight + 10, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+      ctx.arc(centerX, centerY, outerRadius + 20, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0,0,0,0.05)';
       ctx.lineWidth = 1;
       ctx.stroke();
       
-      // Draw inner circle
+      // Рисуем еще один круг для эффекта
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius - 10, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+      ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0,0,0,0.08)';
       ctx.lineWidth = 1;
       ctx.stroke();
       
-      // Draw equalizer bars
-      for (let i = 0; i < barCount; i++) {
-        const angle = (i * 2 * Math.PI) / barCount;
+      // Рисуем частицы, обтекающие логотип
+      for (const particle of particles) {
+        // Обновляем угол (движение)
+        particle.angle += particle.speed;
         
-        // Random height for animation effect
-        const height = Math.random() * barMaxHeight + 10;
-        
-        const startX = centerX + (radius - 5) * Math.cos(angle);
-        const startY = centerY + (radius - 5) * Math.sin(angle);
-        
-        const endX = centerX + (radius + height) * Math.cos(angle);
-        const endY = centerY + (radius + height) * Math.sin(angle);
+        const x = centerX + Math.cos(particle.angle) * particle.radius;
+        const y = centerY + Math.sin(particle.angle) * particle.radius;
         
         ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-        ctx.lineWidth = barWidth;
-        ctx.lineCap = 'round';
-        ctx.stroke();
+        ctx.arc(x, y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        
+        // Добавляем линии между некоторыми частицами для связанного эффекта
+        if (i % 3 === 0) {
+          const nextParticle = particles[(i + 5) % particles.length];
+          const nextX = centerX + Math.cos(nextParticle.angle) * nextParticle.radius;
+          const nextY = centerY + Math.sin(nextParticle.angle) * nextParticle.radius;
+          
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(nextX, nextY);
+          ctx.strokeStyle = `rgba(0, 0, 0, 0.05)`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
       }
+      
+      // Очищаем центральную область для логотипа
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, outerRadius - 40, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0)'; // Прозрачный цвет для логотипа
+      ctx.fill();
       
       requestAnimationFrame(animate);
     };
@@ -73,7 +107,7 @@ const AudioEqualizer = () => {
   return (
     <canvas 
       ref={canvasRef} 
-      className="w-full h-full"
+      className="w-full h-full absolute"
     />
   );
 };

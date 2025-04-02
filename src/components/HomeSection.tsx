@@ -87,14 +87,14 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
             
             <div 
               className={cn(
-                "aspect-square bg-gray-100 rounded-lg flex items-center justify-center opacity-0",
+                "aspect-square bg-gray-100 rounded-lg flex items-center justify-center opacity-0 relative",
                 isLoaded && "animate-fade-in animate-delay-400"
               )}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <AudioEqualizer />
-                <div className="absolute w-36 h-36 flex items-center justify-center">
-                  <Logo size="large" className="w-24 h-24" />
+                <div className="absolute flex items-center justify-center z-10">
+                  <Logo size="large" className="w-32 h-32" />
                 </div>
               </div>
             </div>
