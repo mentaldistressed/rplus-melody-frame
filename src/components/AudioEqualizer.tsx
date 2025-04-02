@@ -1,7 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 
-// Новый компонент, который создает анимацию вокруг логотипа
+// Компонент, который создает анимацию вокруг логотипа
 const AudioEqualizer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -28,6 +28,7 @@ const AudioEqualizer = () => {
       size: number;
       opacity: number;
       color: string;
+      index: number; // Добавляем индекс для каждой частицы
     }[] = [];
     
     // Создаем частицы
@@ -38,7 +39,8 @@ const AudioEqualizer = () => {
         speed: 0.002 + Math.random() * 0.002,
         size: 2 + Math.random() * 3,
         opacity: 0.3 + Math.random() * 0.4,
-        color: `rgba(0, 0, 0, ${0.2 + Math.random() * 0.3})`
+        color: `rgba(0, 0, 0, ${0.2 + Math.random() * 0.3})`,
+        index: i // Сохраняем индекс частицы
       });
     }
     
@@ -61,7 +63,7 @@ const AudioEqualizer = () => {
       ctx.stroke();
       
       // Рисуем частицы, обтекающие логотип
-      for (const particle of particles) {
+      particles.forEach((particle, index) => {
         // Обновляем угол (движение)
         particle.angle += particle.speed;
         
@@ -74,8 +76,8 @@ const AudioEqualizer = () => {
         ctx.fill();
         
         // Добавляем линии между некоторыми частицами для связанного эффекта
-        if (i % 3 === 0) {
-          const nextParticle = particles[(i + 5) % particles.length];
+        if (index % 3 === 0) {
+          const nextParticle = particles[(index + 5) % particles.length];
           const nextX = centerX + Math.cos(nextParticle.angle) * nextParticle.radius;
           const nextY = centerY + Math.sin(nextParticle.angle) * nextParticle.radius;
           
@@ -86,7 +88,7 @@ const AudioEqualizer = () => {
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
-      }
+      });
       
       // Очищаем центральную область для логотипа
       ctx.beginPath();
