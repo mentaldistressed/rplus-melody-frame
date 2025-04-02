@@ -1,9 +1,9 @@
 
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useRef } from 'react';
-import { AlignJustify } from 'lucide-react';
-import LatestReleases from './LatestReleases';
 import AudioEqualizer from './AudioEqualizer';
+import LatestReleases from './LatestReleases';
+import Logo from './Logo';
 
 interface HomeSectionProps {
   isActive: boolean;
@@ -94,7 +94,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               <div className="relative w-full h-full flex items-center justify-center">
                 <AudioEqualizer />
                 <div className="absolute w-36 h-36 flex items-center justify-center">
-                  {/* Space reserved for logo */}
+                  <Logo size="large" className="w-24 h-24" />
                 </div>
               </div>
             </div>

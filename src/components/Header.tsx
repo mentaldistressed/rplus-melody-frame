@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/utils/authUtils';
 import { Link, useNavigate } from 'react-router-dom';
-import { AlignJustify } from 'lucide-react';
+import Logo from './Logo';
 
 interface HeaderProps {
   activeSection: string;
@@ -40,7 +40,7 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
     <header className="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <AlignJustify className="mr-3" />
+          <Logo className="mr-3" size="medium" />
           <h1 
             className="text-2xl md:text-3xl font-bold cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
             onClick={() => handleNavigation('home')}

@@ -1,7 +1,8 @@
 
 import { cn } from '@/lib/utils';
-import { Mail, AlignJustify, Instagram, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ const Footer = () => {
         {/* Top section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div className="flex items-center mb-6 md:mb-0">
-            <AlignJustify className="mr-3" />
+            <Logo className="mr-3" size="medium" />
             <h2 className="text-2xl font-bold uppercase">rplus</h2>
           </div>
           
