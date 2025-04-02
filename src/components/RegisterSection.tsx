@@ -9,6 +9,8 @@ import * as z from 'zod';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/utils/authUtils';
 import { Eye, EyeOff } from 'lucide-react';
+import { useRegistrationStore } from '@/utils/registrationUtils';
+import { useToast } from '@/hooks/use-toast';
 
 // Define form validation schema
 const formSchema = z.object({
@@ -36,6 +38,8 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { register } = useAuth();
+  const { toast } = useToast();
+  const isRegistrationEnabled = useRegistrationStore((state) => state.isRegistrationEnabled);
 
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,6 +53,15 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!isRegistrationEnabled) {
+      toast({
+        title: "Регистрация отключена",
+        description: "В данный момент регистрация новых пользователей отключена. Пожалуйста, попробуйте позже.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     
     try {
@@ -61,6 +74,21 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
       }
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleLoginClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onSectionChange('login');
+  };
+
+  const handleRegisterClick = () => {
+    if (!isRegistrationEnabled) {
+      toast({
+        title: "Регистрация отключена",
+        description: "В данный момент регистрация новых пользователей отключена. Пожалуйста, попробуйте позже.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -91,7 +119,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
                         placeholder="Введите ваш email" 
                         type="email"
                         {...field} 
-                        disabled={isLoading} 
+                        disabled={isLoading || !isRegistrationEnabled} 
                       />
                     </FormControl>
                     <FormMessage />
@@ -111,7 +139,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
                           type={showPassword ? "text" : "password"} 
                           placeholder="Введите пароль" 
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || !isRegistrationEnabled}
                           className="pr-10"
                         />
                         <button 
@@ -141,7 +169,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
                           type={showConfirmPassword ? "text" : "password"} 
                           placeholder="Повторите пароль" 
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || !isRegistrationEnabled}
                           className="pr-10"
                         />
                         <button 
@@ -162,7 +190,8 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={isLoading}
+                disabled={isLoading || !isRegistrationEnabled}
+                onClick={handleRegisterClick}
               >
                 {isLoading ? "Создание аккаунта..." : "Зарегистрироваться"}
               </Button>
@@ -175,10 +204,7 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
           <a 
             href="#" 
             className="text-primary underline-offset-4 hover:underline"
-            onClick={(e) => {
-              e.preventDefault();
-              onSectionChange('login');
-            }}
+            onClick={handleLoginClick}
           >
             Войти
           </a>

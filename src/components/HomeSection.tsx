@@ -99,7 +99,12 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               )}
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                <Music size={120} className="animate-pulse-slow" />
+                <div className="flex items-center space-x-6">
+                  <Music size={120} className="animate-pulse-slow" />
+                  <div className="w-24 h-24 bg-black/5 rounded flex items-center justify-center">
+                    {/* Space for logo */}
+                  </div>
+                </div>
                 <div className="absolute w-24 h-24 rounded-full bg-black opacity-10 animate-pulse-slow" />
                 <div className="absolute w-48 h-48 rounded-full border border-black opacity-20 animate-pulse-slow" />
                 <div className="absolute w-72 h-72 rounded-full border border-black opacity-10 animate-pulse-slow" />
