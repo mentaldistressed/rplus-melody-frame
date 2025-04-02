@@ -14,7 +14,6 @@ import {
 
 interface UserData {
   id: string;
-  email: string;
   username: string;
   created_at: string;
 }
@@ -38,7 +37,7 @@ const UserManagement = () => {
       // Fetch users from Supabase
       const { data, error } = await supabase
         .from('users')
-        .select('id, email, username, created_at');
+        .select('id, username, created_at');
         
       if (error) throw error;
       
@@ -128,9 +127,6 @@ const UserManagement = () => {
                   Имя пользователя
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Дата регистрации
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -143,9 +139,6 @@ const UserManagement = () => {
                 <tr key={user.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.username}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {user.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {formatDate(user.created_at)}
@@ -181,17 +174,6 @@ const UserManagement = () => {
                 value={editUsername}
                 onChange={(e) => setEditUsername(e.target.value)}
                 className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="email" className="text-right">
-                Email
-              </label>
-              <Input
-                id="email"
-                value={editUser?.email || ''}
-                className="col-span-3"
-                disabled
               />
             </div>
           </div>
