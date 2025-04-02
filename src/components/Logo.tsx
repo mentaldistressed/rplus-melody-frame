@@ -9,16 +9,16 @@ interface LogoProps {
 
 const Logo = ({ className, size = 'medium' }: LogoProps) => {
   const sizeClasses = {
-    small: 'h-6 w-auto',
-    medium: 'h-8 w-auto',
-    large: 'h-12 w-auto'
+    small: 'h-8 w-auto max-w-full',
+    medium: 'h-16 w-auto max-w-full',
+    large: 'w-full h-full max-w-full max-h-full'
   };
 
   return (
     <img 
       src="/lovable-uploads/459f1cf5-4a7c-47e3-9a28-4bc7a10675f1.png" 
       alt="rplus logo" 
-      className={cn(sizeClasses[size], className)}
+      className={cn(sizeClasses[size], className, "object-contain")}
     />
   );
 };

@@ -87,14 +87,17 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
             
             <div 
               className={cn(
-                "aspect-square bg-gray-100 rounded-lg flex items-center justify-center opacity-0 relative",
+                "relative aspect-square flex items-center justify-center opacity-0",
                 isLoaded && "animate-fade-in animate-delay-400"
               )}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <AudioEqualizer />
-                <div className="absolute flex items-center justify-center z-10">
-                  <Logo size="large" className="w-32 h-32" />
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  {/* Контейнер для логотипа с центрированием */}
+                  <div className="relative w-3/5 h-3/5">
+                    <Logo size="large" className="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>
