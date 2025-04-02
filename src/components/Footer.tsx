@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { Mail, AlignJustify, Instagram, Telegram } from 'lucide-react';
+import { Mail, AlignJustify, Instagram, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -48,7 +48,7 @@ const Footer = () => {
               className="hover:opacity-70 transition-opacity"
               aria-label="Telegram"
             >
-              <Telegram size={20} />
+              <MessageCircle size={20} />
             </a>
             <a 
               href="mailto:info@rplus.com" 
