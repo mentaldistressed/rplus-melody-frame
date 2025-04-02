@@ -10,6 +10,7 @@ interface Release {
   releaseDate: string;
   coverUrl: string;
   audioUrl: string;
+  bandLink: string;
 }
 
 interface LatestReleasesProps {
@@ -24,7 +25,8 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
       artist: 'Grant Ortega',
       releaseDate: '28.03.2025',
       coverUrl: 'https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&h=500&fit=crop',
-      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample3.mp3'
+      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample3.mp3',
+      bandLink: 'https://band.link/test'
     },
     {
       id: '2',
@@ -32,7 +34,8 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
       artist: 'erix',
       releaseDate: '21.03.2025',
       coverUrl: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&h=500&fit=crop',
-      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample1.mp3'
+      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample1.mp3',
+      bandLink: 'https://band.link/test'
     },
     {
       id: '3',
@@ -40,15 +43,10 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
       artist: 'keelpaint',
       releaseDate: '21.03.2025',
       coverUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&h=500&fit=crop',
-      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample2.mp3'
+      audioUrl: 'https://filesamples.com/samples/audio/mp3/sample2.mp3',
+      bandLink: 'https://band.link/test'
     }
   ]);
-
-  const playAudio = (audioUrl: string, title: string, artist: string) => {
-    const audio = new Audio(audioUrl);
-    audio.play();
-    console.log(`Playing: ${title} by ${artist}`);
-  };
 
   return (
     <section className={cn(
@@ -77,12 +75,14 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
                 <p className="text-gray-600 mb-4">{release.artist}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">Выпущено: {release.releaseDate}</span>
-                  <button 
-                    onClick={() => playAudio(release.audioUrl, release.title, release.artist)}
+                  <a 
+                    href={release.bandLink}
+                    target="_blank"
+                    rel="noopener noreferrer" 
                     className="text-sm flex items-center gap-1 hover:text-gray-700 transition-colors"
                   >
                     <Play size={16} /> Слушать
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

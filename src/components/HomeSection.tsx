@@ -1,8 +1,9 @@
 
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useRef } from 'react';
-import { Music, AlignJustify } from 'lucide-react';
+import { AlignJustify } from 'lucide-react';
 import LatestReleases from './LatestReleases';
+import AudioEqualizer from './AudioEqualizer';
 
 interface HomeSectionProps {
   isActive: boolean;
@@ -43,14 +44,6 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
     >
       <div className="px-6 md:px-12 pb-20">
         <div className="max-w-7xl mx-auto">
-          {/* Logo at the top */}
-          <div className="flex justify-center mb-12">
-            <div className="flex items-center">
-              <AlignJustify size={32} className="mr-3" />
-              <span className="text-3xl font-bold uppercase">rplus</span>
-            </div>
-          </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-6">
@@ -76,7 +69,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                     isLoaded && "animate-slide-up animate-delay-200"
                   )}
                 >
-                  Музыкальный лейбл с фокусом на электронной музыке, объединяющий талантливых артистов и создающий неповторимое звучание.
+                  Создавая музыку будущего.
                 </p>
               </div>
               
@@ -99,15 +92,10 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               )}
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                <div className="flex items-center space-x-6">
-                  <Music size={120} className="animate-pulse-slow" />
-                  <div className="w-24 h-24 bg-black/5 rounded flex items-center justify-center">
-                    {/* Space for logo */}
-                  </div>
+                <AudioEqualizer />
+                <div className="absolute w-36 h-36 flex items-center justify-center">
+                  {/* Space reserved for logo */}
                 </div>
-                <div className="absolute w-24 h-24 rounded-full bg-black opacity-10 animate-pulse-slow" />
-                <div className="absolute w-48 h-48 rounded-full border border-black opacity-20 animate-pulse-slow" />
-                <div className="absolute w-72 h-72 rounded-full border border-black opacity-10 animate-pulse-slow" />
               </div>
             </div>
           </div>

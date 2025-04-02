@@ -82,7 +82,8 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
     onSectionChange('login');
   };
 
-  const handleRegisterClick = () => {
+  const handleRegisterLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!isRegistrationEnabled) {
       toast({
         title: "Регистрация отключена",
@@ -191,7 +192,6 @@ const RegisterSection: React.FC<RegisterSectionProps> = ({ isActive, onSectionCh
                 type="submit" 
                 className="w-full"
                 disabled={isLoading || !isRegistrationEnabled}
-                onClick={handleRegisterClick}
               >
                 {isLoading ? "Создание аккаунта..." : "Зарегистрироваться"}
               </Button>
