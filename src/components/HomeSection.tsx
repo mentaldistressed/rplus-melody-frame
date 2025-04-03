@@ -63,14 +63,14 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 >
                   rplus
                 </h1>
-                <p 
+                {/* <p 
                   className={cn(
                     "text-lg md:text-xl opacity-0 leading-relaxed",
                     isLoaded && "animate-slide-up animate-delay-200"
                   )}
                 >
                   Лучший музыкальный лейбл
-                </p>
+                </p> */}
               </div>
               
               <div 
