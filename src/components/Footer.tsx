@@ -17,9 +17,9 @@ const Footer = () => {
             <h2 className="text-2xl font-bold">rplus</h2>
           </div>
           
-          <div className="text-sm text-gray-600">
+          {/* <div className="text-sm text-gray-600">
             Лучший музыкальный лейбл
-          </div>
+          </div> */}
           
           <div className="flex items-center space-x-6 mt-6 md:mt-0">
             <a 
