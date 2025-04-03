@@ -51,6 +51,16 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
+        <Link
+            to="https://docs.rpluslb.ru"
+            className={cn(
+              "link-underline text-sm uppercase tracking-wider font-medium",
+              activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
+            )}
+          >
+            Генерация договоров
+          </Link>
+          
           <Link
             to="/"
             className={cn(
@@ -68,16 +78,6 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             )}
           >
             Контакты
-          </Link>
-          
-          <Link
-            to="https://docs.rpluslb.ru"
-            className={cn(
-              "link-underline text-sm uppercase tracking-wider font-medium",
-              activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
-            )}
-          >
-            Генерация договоров
           </Link>
           
           {isAuthenticated ? (
