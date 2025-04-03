@@ -64,6 +64,10 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				montserrat: ['Montserrat', 'sans-serif']
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -111,6 +115,14 @@ export default {
 					'50%': {
 						opacity: '0.8'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
@@ -118,10 +130,8 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.8s ease-out forwards',
 				'slide-up': 'slide-up 0.5s ease-out forwards',
-				'pulse-slow': 'pulse-slow 3s infinite ease-in-out'
-			},
-			fontFamily: {
-				sans: ['Inter', 'sans-serif']
+				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
+				'float': 'float 6s infinite ease-in-out'
 			}
 		}
 	},

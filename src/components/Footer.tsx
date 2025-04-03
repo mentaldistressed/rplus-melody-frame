@@ -8,25 +8,21 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="px-6 py-8 md:py-12 bg-white text-black">
+    <footer className="px-4 sm:px-6 py-8 md:py-12 bg-white text-black border-t border-gray-100">
       <div className="max-w-7xl mx-auto">
         {/* Top section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-center mb-10">
           <div className="flex items-center mb-6 md:mb-0">
             <Logo className="mr-3" size="medium" />
             <h2 className="text-2xl font-bold">rplus</h2>
           </div>
           
-          {/* <div className="text-sm text-gray-600">
-            Лучший музыкальный лейбл
-          </div> */}
-          
-          <div className="flex items-center space-x-6 mt-6 md:mt-0">
+          <div className="flex items-center space-x-6">
             <a 
               href="https://vk.com/rplus" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:opacity-70 transition-opacity"
+              className="hover:opacity-70 transition-opacity p-2"
               aria-label="VK"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
@@ -37,7 +33,7 @@ const Footer = () => {
               href="https://instagram.com/rplus_label" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:opacity-70 transition-opacity"
+              className="hover:opacity-70 transition-opacity p-2"
               aria-label="Instagram"
             >
               <Instagram size={20} />
@@ -46,14 +42,14 @@ const Footer = () => {
               href="https://t.me/lbrplus" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:opacity-70 transition-opacity"
+              className="hover:opacity-70 transition-opacity p-2"
               aria-label="Telegram"
             >
               <MessageCircle size={20} />
             </a>
             <a 
               href="mailto:info@rpluslb.ru" 
-              className="hover:opacity-70 transition-opacity"
+              className="hover:opacity-70 transition-opacity p-2"
               aria-label="Email"
             >
               <Mail size={20} />
@@ -65,19 +61,19 @@ const Footer = () => {
         <div className="w-full h-px bg-gray-200 mb-8"></div>
         
         {/* Bottom section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div className="text-xs text-gray-600 mb-6 md:mb-0">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-xs text-gray-600 order-2 md:order-1">
             © {currentYear} rplus. Все права защищены.
           </div>
           
-          <div className="flex flex-col md:flex-row items-start md:items-center md:space-x-6 text-xs text-gray-600">
-            <Link to="/" className="mb-2 md:mb-0 hover:text-black transition-colors">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center sm:space-x-6 text-xs text-gray-600 space-y-3 sm:space-y-0 order-1 md:order-2">
+            <Link to="/privacy-policy" className="hover:text-black transition-colors">
               Политика конфиденциальности
             </Link>
-            <Link to="/" className="mb-2 md:mb-0 hover:text-black transition-colors">
+            <Link to="/terms" className="hover:text-black transition-colors">
               Условия использования
             </Link>
-            <Link to="/" className="hover:text-black transition-colors">
+            <Link to="/cookies" className="hover:text-black transition-colors">
               Политика cookies
             </Link>
           </div>

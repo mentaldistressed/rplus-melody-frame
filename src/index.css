@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,10 +45,19 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
   }
 
   ::selection {
     @apply bg-black text-white;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat;
   }
 
   .animate-delay-100 {
@@ -92,5 +101,36 @@
   .link-underline:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
+  }
+  
+  /* Стили для карточек релизов */
+  .release-card {
+    @apply transition-all duration-300;
+  }
+  
+  .release-card:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+  
+  /* Пульсирующая анимация */
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(0.97); }
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+  
+  /* Плавное появление контента при скроллинге */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+  
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
