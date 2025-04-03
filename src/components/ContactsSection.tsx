@@ -50,7 +50,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
           )}
         >
           <a 
-            href="mailto:info@rpluslabel.com" 
+            href="mailto:info@rpluslb.ru" 
             className="block p-8 rounded-lg border bg-white shadow-sm hover:shadow-md hover:bg-secondary/10 transition-all hover:-translate-y-1 group"
           >
             <div className="flex items-center space-x-4 mb-4">
@@ -60,7 +60,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
               <h3 className="text-xl font-medium">Email</h3>
             </div>
             <p className="text-muted-foreground mb-4">Напишите нам письмо на электронную почту</p>
-            <p className="font-medium group-hover:underline">info@rpluslabel.com</p>
+            <p className="font-medium group-hover:underline">info@rpluslb.ru</p>
           </a>
           
           <a 
