@@ -62,7 +62,7 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             target="_blank"
             rel="noopener noreferrer"
           >
-            Генерация договоров
+            Генератор договоров
           </Link>
           
           <Link
@@ -141,7 +141,7 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             target="_blank"
             rel="noopener noreferrer"
           >
-            Генерация договоров
+            Генератор договоров
           </Link>
           <Link
             to="/"
