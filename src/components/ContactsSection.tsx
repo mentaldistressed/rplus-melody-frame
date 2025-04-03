@@ -79,7 +79,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
             </div>
             <p className="text-muted-foreground mb-6">Адрес электронной почты, на которую Вы можете отправить свой материал</p>
             <p className="font-medium text-lg group-hover:underline flex items-center">
-              info@rpluslb.ru
+              artists@rpluslb.ru
               <ExternalLink className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" size={16} />
             </p>
           </a>
