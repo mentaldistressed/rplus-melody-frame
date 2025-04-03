@@ -17,7 +17,7 @@ const Logo = ({ className, size = 'medium' }: LogoProps) => {
   return (
     <img 
       // src="/lovable-uploads/459f1cf5-4a7c-47e3-9a28-4bc7a10675f1.png" 
-      src="/lovable-uploads/1000022578-Photoroom.png"
+      src="/lovable-uploads/rplus-logo.png"
       alt="rplus logo" 
       className={cn(sizeClasses[size], className, "object-contain")}
     />
