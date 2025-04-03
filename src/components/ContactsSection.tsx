@@ -77,7 +77,7 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
               </div>
               <h3 className="text-xl font-bold">Email</h3>
             </div>
-            <p className="text-muted-foreground mb-6">ХУЙХУХЙУХЙУХЙ</p>
+            <p className="text-muted-foreground mb-6">Свой материал можно направить сюда</p>
             <p className="font-medium text-lg group-hover:underline flex items-center">
               artists@rpluslb.ru
               <ExternalLink className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" size={16} />
