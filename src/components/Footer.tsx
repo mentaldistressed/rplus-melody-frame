@@ -71,13 +71,13 @@ const Footer = () => {
           </div>
           
           <div className="flex flex-col md:flex-row items-start md:items-center md:space-x-6 text-xs text-gray-600">
-            <Link to="/privacy-policy" className="mb-2 md:mb-0 hover:text-black transition-colors">
+            <Link to="/" className="mb-2 md:mb-0 hover:text-black transition-colors">
               Политика конфиденциальности
             </Link>
-            <Link to="/terms" className="mb-2 md:mb-0 hover:text-black transition-colors">
+            <Link to="/" className="mb-2 md:mb-0 hover:text-black transition-colors">
               Условия использования
             </Link>
-            <Link to="/cookies" className="hover:text-black transition-colors">
+            <Link to="/" className="hover:text-black transition-colors">
               Политика cookies
             </Link>
           </div>
