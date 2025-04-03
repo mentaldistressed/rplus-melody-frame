@@ -70,6 +70,16 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             Контакты
           </Link>
           
+          <Link
+            to="https://docs.rpluslb.ru"
+            className={cn(
+              "link-underline text-sm uppercase tracking-wider font-medium",
+              activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
+            )}
+          >
+            Генерация договоров
+          </Link>
+          
           {isAuthenticated ? (
             <button
               onClick={handleLogout}
