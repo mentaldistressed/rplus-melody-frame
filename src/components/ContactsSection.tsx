@@ -1,7 +1,7 @@
 
 import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
-import { Mail, MessageSquare, Send, Phone, MapPin, Share2 } from 'lucide-react';
+import { Mail, MessageSquare, Phone, MapPin } from 'lucide-react';
 
 interface ContactsSectionProps {
   isActive: boolean;
@@ -9,13 +9,6 @@ interface ContactsSectionProps {
 
 const ContactsSection = ({ isActive }: ContactsSectionProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (isActive) {
@@ -23,28 +16,10 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
     }
   }, [isActive]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Имитация отправки формы
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      // Сбросим состояние отправки через 5 секунд
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
-  };
-
   return (
     <section 
       className={cn(
-        "fixed inset-0 w-full min-h-screen pt-24 px-6 md:px-12 transition-all duration-500 transform",
+        "w-full min-h-screen pt-32 sm:pt-36 pb-16 px-4 sm:px-6 md:px-12 transition-all duration-500 transform",
         isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
@@ -106,113 +81,9 @@ const ContactsSection = ({ isActive }: ContactsSectionProps) => {
           </a>
         </div>
         
-        <div 
-          className={cn(
-            "mt-16 max-w-4xl mx-auto opacity-0",
-            isLoaded && "animate-fade-in animate-delay-300"
-          )}
-        >
-          <div className="bg-white rounded-xl border p-8 shadow-sm">
-            <h3 className="text-2xl font-semibold mb-6 text-center font-montserrat">
-              Отправьте нам сообщение
-            </h3>
-            
-            {isSubmitted ? (
-              <div className="text-center py-8">
-                <div className="inline-flex items-center justify-center p-4 bg-green-100 text-green-700 rounded-full mb-4">
-                  <Send className="w-6 h-6" />
-                </div>
-                <h4 className="text-xl font-medium mb-2">Сообщение отправлено!</h4>
-                <p className="text-gray-600">Мы получили ваше сообщение и свяжемся с вами в ближайшее время.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium">
-                      Ваше имя
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium">
-                      Ваш Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-medium">
-                    Сообщение
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={5}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                    required
-                  />
-                </div>
-                
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={cn(
-                      "px-6 py-3 bg-black text-white rounded-lg flex items-center",
-                      isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:bg-gray-800",
-                      "transition-all transform hover:-translate-y-0.5"
-                    )}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Отправка...
-                      </>
-                    ) : (
-                      <>
-                        Отправить сообщение <Send className="ml-2 w-4 h-4" />
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-        
-        <div 
-          className={cn(
-            "mt-12 max-w-3xl mx-auto text-center opacity-0",
-            isLoaded && "animate-fade-in animate-delay-400"
-          )}
-        >
-          <p className="text-gray-600 flex items-center justify-center space-x-2">
-            <Share2 size={16} />
-            <span>Поделитесь нашими контактами с друзьями и коллегами музыкантами</span>
+        <div className="mt-16 text-center">
+          <p className="text-gray-500">
+            Мы ценим ваше время и стремимся к оперативному ответу на все обращения.
           </p>
         </div>
       </div>

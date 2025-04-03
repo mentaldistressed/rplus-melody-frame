@@ -1,5 +1,4 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -81,48 +80,6 @@
     animation-delay: 500ms;
   }
   
-  .link-underline {
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .link-underline:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: currentColor;
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
-  }
-  
-  .link-underline:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-  
-  /* Стили для карточек релизов */
-  .release-card {
-    @apply transition-all duration-300;
-  }
-  
-  .release-card:hover {
-    @apply shadow-xl -translate-y-2;
-  }
-  
-  /* Пульсирующая анимация */
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.9; transform: scale(0.97); }
-  }
-  
-  .animate-pulse-soft {
-    animation: pulse-soft 3s ease-in-out infinite;
-  }
-  
   /* Плавное появление контента при скроллинге */
   .fade-in-section {
     opacity: 0;
@@ -135,87 +92,28 @@
     transform: translateY(0);
   }
   
-  /* Новые стили */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-black via-gray-700 to-black;
+  /* Базовые анимации */
+  @keyframes slide-up {
+    0% { 
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% { 
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
   }
   
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
   
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-sm border border-white/90;
-  }
-  
-  .subtle-shadow {
-    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.15);
-  }
-  
-  .hover-elevate {
-    @apply transition-all duration-300;
-    box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hover-elevate:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Анимация волны для фона */
-  .wave-bg {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .wave-bg::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    z-index: -1;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0) 0%, rgba(0,0,0,0.03) 100%);
-    animation: wave 15s infinite linear;
-  }
-  
-  @keyframes wave {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Улучшенные карточки */
-  .enhanced-card {
-    @apply rounded-xl overflow-hidden transition-all duration-300;
-    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .enhanced-card:hover {
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-  }
-  
-  /* Анимированный градиентный бордер */
-  .gradient-border {
-    position: relative;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(90deg, #000, #555, #000);
-    background-size: 200% 200%;
-    animation: gradient-animation 5s ease infinite;
-  }
-  
-  @keyframes gradient-animation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .gradient-border-content {
-    @apply bg-white rounded-xl overflow-hidden;
-    height: 100%;
-    width: 100%;
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
   }
 }
-

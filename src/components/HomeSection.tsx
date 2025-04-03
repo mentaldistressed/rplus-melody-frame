@@ -54,7 +54,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
     <section 
       ref={sectionRef}
       className={cn(
-        "w-full min-h-[100dvh] pt-20 sm:pt-24 transition-all duration-500 transform wave-bg",
+        "w-full min-h-[100dvh] pt-32 sm:pt-36 transition-all duration-500 transform",
         isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
@@ -69,7 +69,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                     isLoaded && "animate-slide-up"
                   )}
                 >
-                  <span className="gradient-text">музыкальный лейбл</span>
+                  <span className="text-black">музыкальный лейбл</span>
                 </h2>
                 <h2 
                   className={cn(
@@ -116,8 +116,8 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 "hidden sm:flex items-center gap-4 text-gray-600 opacity-0", 
                 isLoaded && "animate-fade-in animate-delay-500"
               )}>
-                <MusicIcon size={20} className="animate-bounce-slow" />
-                <div className="h-px flex-1 bg-gradient-subtle"></div>
+                <MusicIcon size={20} />
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
                 <Headphones size={20} />
               </div>
             </div>
@@ -133,9 +133,9 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                   <AudioEqualizer />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <div className="relative w-3/5 h-3/5 transform hover:scale-105 transition-transform duration-500 animate-float">
-                    <div className="subtle-shadow rounded-full overflow-hidden">
-                      <Logo size="large" className="w-full h-full object-contain drop-shadow-lg" />
+                  <div className="relative w-3/5 h-3/5">
+                    <div className="rounded-full overflow-hidden">
+                      <Logo size="large" className="w-full h-full object-contain drop-shadow-sm" />
                     </div>
                   </div>
                 </div>
