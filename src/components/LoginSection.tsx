@@ -130,7 +130,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
       <div className="max-w-md mx-auto px-6 md:px-0">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 animate-fade-in">Вход</h1>
         <p className="text-muted-foreground mb-8 animate-fade-in animate-delay-100">
-          Войдите в свою учетную запись rplus
+          Введите свои данные для входа в учётную запись
         </p>
         
         <div className="border rounded-lg p-6 mb-8 animate-fade-in animate-delay-200">
