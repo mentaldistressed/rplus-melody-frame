@@ -55,21 +55,20 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 >
                   музыкальный лейбл
                 </h2>
-                <h1 
+                <h2 
                   className={cn(
                     "text-6xl md:text-7xl lg:text-8xl font-bold opacity-0",
                     isLoaded && "animate-slide-up animate-delay-100"
                   )}
                 >
                   rplus
-                </h1>
+                </h2>
                 <p 
                   className={cn(
                     "text-lg md:text-xl opacity-0 leading-relaxed",
                     isLoaded && "animate-slide-up animate-delay-200"
                   )}
                 >
-                  
                 </p>
               </div>
               
@@ -84,7 +83,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
   rel="noopener noreferrer"
   className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors"
 >
-  Связаться с нами
+  Наши контакты
 </a>
 
               </div>

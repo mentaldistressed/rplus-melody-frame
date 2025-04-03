@@ -210,7 +210,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
           </a>
         </p> */}
         <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
-          В данный момент регистрация отключена. Обратитесь к администратору{" "}
+          В данный момент регистрация новых пользователей отключена. Обратитесь к администратору{" "}
         </p>
       </div>
     </section>

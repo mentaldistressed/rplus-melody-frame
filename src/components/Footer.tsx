@@ -23,7 +23,7 @@ const Footer = () => {
           
           <div className="flex items-center space-x-6 mt-6 md:mt-0">
             <a 
-              href="https://vk.com" 
+              href="https://vk.com/rplus" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"
@@ -34,7 +34,7 @@ const Footer = () => {
               </svg>
             </a>
             <a 
-              href="https://instagram.com" 
+              href="https://instagram.com/rplus_label" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"
@@ -43,7 +43,7 @@ const Footer = () => {
               <Instagram size={20} />
             </a>
             <a 
-              href="https://t.me/rplus" 
+              href="https://t.me/lbrplus" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"

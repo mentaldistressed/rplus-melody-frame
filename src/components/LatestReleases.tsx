@@ -55,7 +55,7 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
     )}>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold mb-10 text-center">
-          Наши релизы
+          Наши выпущенные релизы
         </h2>
         
         <div className="w-10 h-1 bg-black mx-auto mb-16"></div>
