@@ -123,6 +123,24 @@ export default {
 					'50%': {
 						transform: 'translateY(-10px)'
 					}
+				},
+				'shimmer': {
+					'0%': {
+						backgroundPosition: '-40rem 0'
+					},
+					'100%': {
+						backgroundPosition: '40rem 0'
+					}
+				},
+				'bounce-slow': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': {
+						transform: 'translateY(-15px)',
+						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
+					}
 				}
 			},
 			animation: {
@@ -131,9 +149,16 @@ export default {
 				'fade-in': 'fade-in 0.8s ease-out forwards',
 				'slide-up': 'slide-up 0.5s ease-out forwards',
 				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
-				'float': 'float 6s infinite ease-in-out'
+				'float': 'float 6s infinite ease-in-out',
+				'shimmer': 'shimmer 2s infinite linear',
+				'bounce-slow': 'bounce-slow 5s infinite'
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-subtle': 'linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,0.03), rgba(255,255,255,0))'
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+

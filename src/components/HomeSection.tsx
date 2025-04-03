@@ -5,7 +5,7 @@ import AudioEqualizer from './AudioEqualizer';
 import LatestReleases from './LatestReleases';
 import Logo from './Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MusicIcon, Headphones } from 'lucide-react';
 
 interface HomeSectionProps {
   isActive: boolean;
@@ -54,7 +54,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
     <section 
       ref={sectionRef}
       className={cn(
-        "w-full min-h-[100dvh] pt-20 sm:pt-24 transition-all duration-500 transform",
+        "w-full min-h-[100dvh] pt-20 sm:pt-24 transition-all duration-500 transform wave-bg",
         isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
@@ -69,11 +69,11 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                     isLoaded && "animate-slide-up"
                   )}
                 >
-                  музыкальный лейбл
+                  <span className="gradient-text">музыкальный лейбл</span>
                 </h2>
                 <h2 
                   className={cn(
-                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0",
+                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0 font-montserrat tracking-tight",
                     isLoaded && "animate-slide-up animate-delay-100"
                   )}
                 >
@@ -85,7 +85,8 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                     isLoaded && "animate-slide-up animate-delay-200"
                   )}
                 >
-                  Профессиональная запись, продюсирование и продвижение талантливых музыкантов
+                  Профессиональная запись, продюсирование и продвижение 
+                  <span className="hidden sm:inline"> талантливых</span> музыкантов
                 </p>
               </div>
               
@@ -97,17 +98,27 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               >
                 <a
                   href="/contacts"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-transform"
                 >
                   Наши контакты
                 </a>
                 
                 <button
                   onClick={scrollToReleases}
-                  className="inline-flex items-center justify-center px-6 py-3 border border-black text-black rounded hover:bg-gray-100 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3.5 border-2 border-black text-black rounded-lg hover:bg-gray-100 transition-colors group"
                 >
-                  Наши релизы <ChevronDown className="ml-2" size={16} />
+                  Наши релизы 
+                  <ChevronDown className="ml-2 group-hover:translate-y-0.5 transition-transform" size={18} />
                 </button>
+              </div>
+              
+              <div className={cn(
+                "hidden sm:flex items-center gap-4 text-gray-600 opacity-0", 
+                isLoaded && "animate-fade-in animate-delay-500"
+              )}>
+                <MusicIcon size={20} className="animate-bounce-slow" />
+                <div className="h-px flex-1 bg-gradient-subtle"></div>
+                <Headphones size={20} />
               </div>
             </div>
             
@@ -122,8 +133,10 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                   <AudioEqualizer />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <div className="relative w-3/5 h-3/5 transform hover:scale-105 transition-transform duration-500">
-                    <Logo size="large" className="w-full h-full object-contain drop-shadow-lg" />
+                  <div className="relative w-3/5 h-3/5 transform hover:scale-105 transition-transform duration-500 animate-float">
+                    <div className="subtle-shadow rounded-full overflow-hidden">
+                      <Logo size="large" className="w-full h-full object-contain drop-shadow-lg" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -137,7 +150,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
       </div>
       
       {/* Декоративный элемент */}
-      <div className="relative w-full overflow-hidden h-24 md:h-32">
+      <div className="relative w-full overflow-hidden h-24 md:h-32 mt-12">
         <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
         <div className="absolute inset-x-0 bottom-0 h-16 bg-white"></div>
       </div>
