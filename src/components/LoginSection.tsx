@@ -198,9 +198,23 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
           </Form>
         </div>
         
-        <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
+         <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
+           У вас нет учетной записи?{" "}
+           <a 
+             href="#" 
+             className="text-primary underline-offset-4 hover:underline"
+             onClick={(e) => {
+               e.preventDefault();
+               onSectionChange('register');
+             }}
+           >
+             Зарегистрироваться
+           </a>
+         </p>
+
+        {/* <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
           В данный момент регистрация новых пользователей отключена. Обратитесь к администратору{" "}
-        </p>
+        </p> */}
       </div>
     </section>
   );
