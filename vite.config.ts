@@ -7,7 +7,7 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    allowedHosts: ['where.d1.test.destinations.yandex2go.cookie.kitchen-helper.fye.rpluslb.ru'],
+    allowedHosts: ['rpluslb.ru'],
     port: 8080,
   },
   plugins: [
