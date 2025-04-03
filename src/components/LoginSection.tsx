@@ -90,7 +90,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
     return (
       <section 
         className={cn(
-          "fixed inset-0 w-full min-h-screen pt-32 transition-all duration-500 transform",
+          "w-full min-h-screen pt-32 sm:pt-36 pb-16 transition-all duration-500 transform",
           isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
         )}
       >
@@ -100,7 +100,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
             Вы вошли в систему
           </p>
           
-          <div className="border rounded-lg p-6 mb-8 animate-fade-in animate-delay-200">
+          <div className="border rounded-lg p-8 mb-8 animate-fade-in animate-delay-200 shadow-sm bg-white">
             <div className="flex flex-col space-y-6">
               <div>
                 <p className="text-sm text-muted-foreground">Имя пользователя</p>
@@ -110,6 +110,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
               <Button 
                 onClick={handleLogout}
                 variant="outline"
+                className="w-full text-base"
               >
                 Выйти из аккаунта
               </Button>
@@ -123,7 +124,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
   return (
     <section 
       className={cn(
-        "fixed inset-0 w-full min-h-screen pt-32 transition-all duration-500 transform",
+        "w-full min-h-screen pt-32 sm:pt-36 pb-16 transition-all duration-500 transform",
         isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"
       )}
     >
@@ -133,7 +134,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
           Введите свои данные для входа в учётную запись
         </p>
         
-        <div className="border rounded-lg p-6 mb-8 animate-fade-in animate-delay-200">
+        <div className="border rounded-lg p-8 mb-8 animate-fade-in animate-delay-200 shadow-sm bg-white">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -148,6 +149,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
                         type="email"
                         {...field} 
                         disabled={isLoading} 
+                        className="py-6"
                       />
                     </FormControl>
                     <FormMessage />
@@ -168,7 +170,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
                           placeholder="Введите пароль" 
                           {...field}
                           disabled={isLoading}
-                          className="pr-10"
+                          className="pr-10 py-6"
                         />
                         <button 
                           type="button"
@@ -187,7 +189,7 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
               
               <Button 
                 type="submit" 
-                className="w-full"
+                className="w-full py-6 text-base font-medium"
                 disabled={isLoading}
               >
                 {isLoading ? "Выполняется вход..." : "Войти"}
@@ -196,19 +198,6 @@ const LoginSection: React.FC<LoginSectionProps> = ({ isActive, onSectionChange }
           </Form>
         </div>
         
-        {/* <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
-          У вас нет учетной записи?{" "}
-          <a 
-            href="#" 
-            className="text-primary underline-offset-4 hover:underline"
-            onClick={(e) => {
-              e.preventDefault();
-              onSectionChange('register');
-            }}
-          >
-            Зарегистрироваться
-          </a>
-        </p> */}
         <p className="text-center text-sm text-muted-foreground animate-fade-in animate-delay-300">
           В данный момент регистрация новых пользователей отключена. Обратитесь к администратору{" "}
         </p>

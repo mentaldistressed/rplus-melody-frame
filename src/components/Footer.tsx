@@ -1,6 +1,6 @@
 
 import { cn } from '@/lib/utils';
-import { Mail, MessageCircle, Instagram, ArrowRight } from 'lucide-react';
+import { Mail, MessageCircle, Instagram, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
@@ -12,13 +12,13 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         {/* Top section */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-center mb-10">
-          <div className="flex items-center mb-8 md:mb-0">
+          <Link to="/" className="flex items-center mb-8 md:mb-0 group">
             <div className="relative group cursor-pointer">
               <div className="absolute -inset-2 rounded-full bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <Logo className="mr-4 relative z-10" size="medium" />
             </div>
             <h2 className="text-3xl font-bold font-montserrat">rplus</h2>
-          </div>
+          </Link>
           
           <div className="flex items-center space-x-7">
             <a 
@@ -63,15 +63,15 @@ const Footer = () => {
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-10"></div>
         
-        {/* Middle section - new */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+        {/* Middle section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
             <h3 className="text-lg font-semibold mb-4">Контакты</h3>
             <div className="space-y-3 text-gray-600">
               <p><span className="font-semibold">Email:</span> info@rpluslb.ru</p>
               <p><span className="font-semibold">Телеграм:</span> @rpluslabel</p>
-              <Link to="/contacts" className="inline-flex items-center text-black hover:underline mt-2">
-                Связаться с нами <ArrowRight size={16} className="ml-1" />
+              <Link to="/contacts" className="inline-flex items-center text-black hover:underline mt-2 group">
+                Связаться с нами <ArrowUpRight size={16} className="ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
           </div>
@@ -84,20 +84,18 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Подпишитесь на обновления</h3>
-            <div className="flex mt-2">
-              <input 
-                type="email" 
-                placeholder="Ваш email"
-                className="px-4 py-2 border border-gray-200 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-black"
-              />
-              <button className="bg-black text-white px-4 py-2 rounded-r-lg hover:bg-gray-800 transition-colors">
-                Отправить
-              </button>
+            <h3 className="text-lg font-semibold mb-4">Быстрые ссылки</h3>
+            <div className="grid grid-cols-1 gap-2">
+              <Link to="/" className="text-gray-600 hover:text-black transition-colors">
+                Главная
+              </Link>
+              <Link to="/contacts" className="text-gray-600 hover:text-black transition-colors">
+                Контакты
+              </Link>
+              <Link to="/login" className="text-gray-600 hover:text-black transition-colors">
+                Вход
+              </Link>
             </div>
-            <p className="text-xs text-gray-500 mt-2">
-              Подпишитесь, чтобы первыми узнавать о новых релизах
-            </p>
           </div>
         </div>
         

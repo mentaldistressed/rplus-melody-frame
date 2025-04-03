@@ -116,4 +116,38 @@
   .animate-fade-in {
     animation: fade-in 0.8s ease-out forwards;
   }
+  
+  /* Пульсирующая анимация для логотипа */
+  @keyframes pulse-slow {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 4s infinite ease-in-out;
+  }
+  
+  /* Hover эффекты для кнопок и карточек */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Градиентный текст */
+  .gradient-text {
+    background: linear-gradient(90deg, #000, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }

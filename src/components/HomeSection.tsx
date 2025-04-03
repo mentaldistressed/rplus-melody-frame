@@ -5,7 +5,7 @@ import AudioEqualizer from './AudioEqualizer';
 import LatestReleases from './LatestReleases';
 import Logo from './Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ChevronDown, MusicIcon, Headphones } from 'lucide-react';
+import { ChevronDown, MusicIcon, Headphones, ArrowRight } from 'lucide-react';
 
 interface HomeSectionProps {
   isActive: boolean;
@@ -71,14 +71,14 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 >
                   <span className="text-black">музыкальный лейбл</span>
                 </h2>
-                <h2 
+                <h1 
                   className={cn(
-                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0 font-montserrat tracking-tight",
+                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0 font-montserrat tracking-tight bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent",
                     isLoaded && "animate-slide-up animate-delay-100"
                   )}
                 >
                   rplus
-                </h2>
+                </h1>
                 <p 
                   className={cn(
                     "text-lg md:text-xl opacity-0 leading-relaxed text-gray-700",
@@ -108,7 +108,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                   className="inline-flex items-center justify-center px-6 py-3.5 border-2 border-black text-black rounded-lg hover:bg-gray-100 transition-colors group"
                 >
                   Наши релизы 
-                  <ChevronDown className="ml-2 group-hover:translate-y-0.5 transition-transform" size={18} />
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                 </button>
               </div>
               
@@ -129,13 +129,10 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               )}
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute inset-0 z-0">
-                  <AudioEqualizer />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="absolute inset-0 z-10 flex items-center justify-center">
                   <div className="relative w-3/5 h-3/5">
-                    <div className="rounded-full overflow-hidden">
-                      <Logo size="large" className="w-full h-full object-contain drop-shadow-sm" />
+                    <div className="rounded-full overflow-hidden bg-white shadow-2xl p-8 animate-pulse-slow">
+                      <Logo size="large" className="w-full h-full object-contain" />
                     </div>
                   </div>
                 </div>

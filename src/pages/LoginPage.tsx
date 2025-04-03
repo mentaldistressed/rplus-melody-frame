@@ -31,20 +31,20 @@ const LoginPage = () => {
   const handleSectionChange = (section: string) => {
     if (section === 'register') {
       navigate('/register');
-    } else {
+    } else if (section === 'home') {
       navigate('/');
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Header 
         activeSection="login" 
         onSectionChange={() => {}}
         isAuthenticated={isUserAuthenticated}
       />
       
-      <main className="flex-grow relative pt-24">
+      <main className="flex-grow relative pt-0">
         <LoginSection 
           isActive={true}
           onSectionChange={handleSectionChange}
