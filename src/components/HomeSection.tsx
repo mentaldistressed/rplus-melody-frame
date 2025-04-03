@@ -79,7 +79,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 >
                   rplus
                 </h1>
-                <p 
+                {/* <p 
                   className={cn(
                     "text-lg md:text-xl opacity-0 leading-relaxed text-gray-700",
                     isLoaded && "animate-slide-up animate-delay-200"
@@ -87,7 +87,7 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 >
                   Профессиональная запись, продюсирование и продвижение 
                   <span className="hidden sm:inline"> талантливых</span> музыкантов
-                </p>
+                </p> */}
               </div>
               
               <div 
