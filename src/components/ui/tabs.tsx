@@ -13,7 +13,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-12 items-center justify-center rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 p-2 text-muted-foreground shadow-inner",
+      "inline-flex h-12 items-center justify-center rounded-lg bg-white/5 backdrop-blur-md border border-white/10 p-2 text-muted-foreground shadow-inner",
       className
     )}
     {...props}
@@ -28,7 +28,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-5 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:scale-[1.05] data-[state=active]:font-semibold",
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-5 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white/15 data-[state=active]:backdrop-blur-lg data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:scale-[1.05] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-white/20",
       className
     )}
     {...props}
@@ -43,7 +43,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 animate-fade-in",
+      "mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 animate-fade-in backdrop-blur-sm",
       className
     )}
     {...props}

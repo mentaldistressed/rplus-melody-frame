@@ -15,15 +15,16 @@ const Logo = ({ className, size = 'medium' }: LogoProps) => {
   };
 
   return (
-    <div className={cn("relative overflow-hidden rounded-full", className)}>
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 hover:opacity-20 transition-opacity duration-700 z-10"></div>
+    <div className={cn("relative overflow-hidden rounded-full group", className)}>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/10 to-gray-700/20 opacity-0 group-hover:opacity-30 transition-opacity duration-700 z-10 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-20 transition-opacity duration-700 z-10 rounded-full"></div>
       <img 
         src="/assets/rplus-logo.png"
         alt="rplus logo" 
         className={cn(
           sizeClasses[size], 
           "object-contain transform transition-all duration-700 hover:scale-105",
-          "animate-gentle-float"
+          "animate-gentle-float hover:animate-none"
         )}
       />
     </div>
