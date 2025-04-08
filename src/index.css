@@ -49,7 +49,7 @@
   }
 
   ::selection {
-    @apply bg-black text-white;
+    @apply bg-black/90 text-white;
   }
 
   html {
@@ -57,7 +57,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-montserrat;
+    @apply font-montserrat font-semibold;
   }
 
   .animate-delay-100 {
@@ -84,7 +84,7 @@
   .fade-in-section {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
   
   .fade-in-section.is-visible {
@@ -117,18 +117,18 @@
     animation: fade-in 0.8s ease-out forwards;
   }
   
-  /* Плавное перемещение для логотипа */
-  @keyframes float {
+  /* Refined logo animation */
+  @keyframes gentle-float {
     0%, 100% { 
       transform: translateY(0);
     }
     50% { 
-      transform: translateY(-10px);
+      transform: translateY(-6px);
     }
   }
   
-  .animate-float {
-    animation: float 6s infinite ease-in-out;
+  .animate-gentle-float {
+    animation: gentle-float 6s infinite ease-in-out;
   }
   
   /* Hover эффекты для кнопок и карточек */
@@ -137,15 +137,86 @@
   }
   
   .hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.08);
   }
   
   /* Градиентный текст */
   .gradient-text {
-    background: linear-gradient(90deg, #000, #333);
+    background: linear-gradient(90deg, #000000, #333333);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Премиум градиент для текста */
+  .premium-gradient-text {
+    background: linear-gradient(90deg, #1a1a1a, #4a4a4a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Smooth grow effect */
+  .hover-grow {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-grow:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  .card-hover:hover {
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+  }
+
+  /* Subtle shimmer effect */
+  @keyframes subtle-shimmer {
+    0% {
+      background-position: -300px 0;
+    }
+    100% {
+      background-position: 300px 0;
+    }
+  }
+
+  .subtle-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background-size: 600px 100%;
+    animation: subtle-shimmer 3s infinite linear;
+  }
+
+  /* Interactive buttons */
+  .interactive-btn {
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .interactive-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+  }
+
+  .interactive-btn:hover::after {
+    width: 300%;
+    height: 300%;
   }
 }

@@ -76,18 +76,22 @@ export default {
 			keyframes: {
 				'accordion-down': {
 					from: {
-						height: '0'
+						height: '0',
+						opacity: '0'
 					},
 					to: {
-						height: 'var(--radix-accordion-content-height)'
+						height: 'var(--radix-accordion-content-height)',
+						opacity: '1'
 					}
 				},
 				'accordion-up': {
 					from: {
-						height: 'var(--radix-accordion-content-height)'
+						height: 'var(--radix-accordion-content-height)',
+						opacity: '1'
 					},
 					to: {
-						height: '0'
+						height: '0',
+						opacity: '0'
 					}
 				},
 				'fade-in': {
@@ -141,6 +145,34 @@ export default {
 						transform: 'translateY(-15px)',
 						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
 					}
+				},
+				'gentle-pulse': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						opacity: '0.95',
+						transform: 'scale(1.01)'
+					}
+				},
+				'grow-fade': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'gentle-float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-6px)'
+					}
 				}
 			},
 			animation: {
@@ -151,14 +183,32 @@ export default {
 				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
 				'shimmer': 'shimmer 2s infinite linear',
-				'bounce-slow': 'bounce-slow 5s infinite'
+				'bounce-slow': 'bounce-slow 5s infinite',
+				'gentle-pulse': 'gentle-pulse 4s infinite ease-in-out',
+				'grow-fade': 'grow-fade 0.4s ease-out forwards',
+				'gentle-float': 'gentle-float 6s infinite ease-in-out'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-subtle': 'linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,0.03), rgba(255,255,255,0))'
+				'gradient-subtle': 'linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,0.03), rgba(255,255,255,0))',
+				'gradient-shine': 'linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)',
+				'gradient-premium': 'linear-gradient(to right, #1a1a1a, #4a4a4a)'
+			},
+			boxShadow: {
+				'subtle': '0 4px 12px -2px rgba(0, 0, 0, 0.05)',
+				'elevated': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
+				'premium': '0 20px 30px -10px rgba(0, 0, 0, 0.1)'
+			},
+			transitionProperty: {
+				'height': 'height',
+				'spacing': 'margin, padding',
+				'full': 'all'
+			},
+			transitionTimingFunction: {
+				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'bounce': 'cubic-bezier(0.8, 0, 1, 1)'
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
