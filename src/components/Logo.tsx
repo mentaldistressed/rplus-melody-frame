@@ -15,12 +15,18 @@ const Logo = ({ className, size = 'medium' }: LogoProps) => {
   };
 
   return (
-    <img 
-      // src="/lovable-uploads/459f1cf5-4a7c-47e3-9a28-4bc7a10675f1.png" 
-      src="/assets/rplus-logo.png"
-      alt="rplus logo" 
-      className={cn(sizeClasses[size], className, "object-contain")}
-    />
+    <div className={cn("relative overflow-hidden rounded-full", className)}>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 hover:opacity-20 transition-opacity duration-700 z-10"></div>
+      <img 
+        src="/assets/rplus-logo.png"
+        alt="rplus logo" 
+        className={cn(
+          sizeClasses[size], 
+          "object-contain transform transition-all duration-700 hover:scale-105",
+          "animate-gentle-float"
+        )}
+      />
+    </div>
   );
 };
 

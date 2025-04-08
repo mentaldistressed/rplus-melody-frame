@@ -10,7 +10,7 @@
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
 
-    --card: 0 0% 98%;
+    --card: 0 0% 99%;
     --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
@@ -35,7 +35,7 @@
     --input: 0 0% 85%;
     --ring: 0 0% 85%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
   }
 
   * {
@@ -218,5 +218,48 @@
   .interactive-btn:hover::after {
     width: 300%;
     height: 300%;
+  }
+  
+  /* Эффекты появления */
+  .reveal-bottom {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+  
+  .reveal-bottom.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Эффект глянцевых элементов */
+  .glossy-element {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+  }
+  
+  /* Изящный border эффект */
+  .elegant-border {
+    position: relative;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  .elegant-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: -2px;
+    background: linear-gradient(to right, #000, #444);
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .elegant-border:hover::before {
+    opacity: 1;
   }
 }
