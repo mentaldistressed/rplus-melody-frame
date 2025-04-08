@@ -53,44 +53,46 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
 
   return (
     <section className={cn(
-      "py-16 sm:py-20 bg-white text-black transition-opacity duration-700 px-4 sm:px-6",
-      isVisible ? "opacity-100" : "opacity-0"
+      "py-16 sm:py-20 bg-white text-black transition-all duration-700 px-4 sm:px-6",
+      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
     )}>
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center font-montserrat">
-          Наши выпущенные релизы
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center font-montserrat tracking-tight">
+          <span className="bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent">
+            Наши выпущенные релизы
+          </span>
         </h2>
         
-        <div className="w-24 h-1 bg-gradient-to-r from-gray-200 via-black to-gray-200 mx-auto mb-12 sm:mb-16"></div>
+        <div className="w-32 h-1 bg-gradient-to-r from-gray-200 via-black to-gray-200 mx-auto mb-12 sm:mb-16"></div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {releases.map((release) => (
             <a 
               key={release.id}
               href={release.bandLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="block transform transition-transform duration-300 hover:-translate-y-1 focus:outline-none"
+              className="group block transition-all duration-500 hover:-translate-y-2 focus:outline-none"
             >
-              <div className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                 <div className="aspect-square overflow-hidden relative">
                   <img 
                     src={release.coverUrl} 
                     alt={release.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-4 text-white">
-                      <span className="inline-flex items-center text-sm bg-black/70 rounded-full py-1 px-3">
-                        <Music size={14} className="mr-1" /> Слушать
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-between">
+                    <div className="p-4 text-white w-full flex justify-end">
+                      <span className="inline-flex items-center text-sm bg-black/70 rounded-full py-1.5 px-3.5 backdrop-blur-sm">
+                        <Music size={14} className="mr-1.5" /> Слушать
                       </span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-4 sm:p-5">
-                  <h3 className="font-bold text-lg sm:text-xl mb-1 truncate">{release.title}</h3>
-                  <p className="text-gray-600 mb-3 truncate font-medium">{release.artist}</p>
+                <div className="p-5 sm:p-6">
+                  <h3 className="font-bold text-lg sm:text-xl mb-1 truncate tracking-tight">{release.title}</h3>
+                  <p className="text-gray-600 mb-4 truncate font-medium">{release.artist}</p>
                   
                   <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center text-gray-500">
@@ -98,9 +100,9 @@ const LatestReleases = ({ isVisible }: LatestReleasesProps) => {
                       <span>{release.releaseDate}</span>
                     </div>
                     
-                    <span className="text-black flex items-center gap-1 font-medium hover:underline">
+                    <span className="text-black flex items-center gap-1.5 font-medium group-hover:underline transition-all">
                       {isMobile ? 'Открыть' : 'Слушать на площадках'}
-                      <ExternalLink size={14} />
+                      <ExternalLink size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
                 </div>

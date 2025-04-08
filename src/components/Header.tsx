@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/utils/authUtils';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,9 +14,20 @@ interface HeaderProps {
 
 const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavigation = (section: string) => {
     if (section === 'home') {
@@ -39,7 +50,10 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 md:py-6 md:px-12 bg-background/95 backdrop-blur-md border-b border-gray-100">
+    <header className={cn(
+      "fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 md:py-5 md:px-12 bg-background/95 backdrop-blur-md border-b transition-all duration-300",
+      isScrolled ? "border-gray-200 shadow-sm" : "border-transparent"
+    )}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <Logo className="mr-3" size={isMobile ? "small" : "medium"} />
@@ -47,7 +61,9 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             className="text-xl md:text-2xl font-bold cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
             onClick={() => handleNavigation('home')}
           >
-            rplus
+            <span className="bg-gradient-to-r from-black via-gray-900 to-gray-700 bg-clip-text text-transparent">
+              rplus
+            </span>
           </h1>
         </div>
 
@@ -56,7 +72,7 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
           <Link
             to="https://docs.rpluslb.ru"
             className={cn(
-              "link-underline text-sm uppercase tracking-wider font-medium",
+              "text-sm uppercase tracking-wider font-medium relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:origin-center after:scale-x-0 after:transition-transform hover:after:scale-x-100",
               activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
             )}
             target="_blank"
@@ -68,8 +84,8 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
           <Link
             to="/"
             className={cn(
-              "link-underline text-sm uppercase tracking-wider font-medium",
-              activeSection === 'home' ? "opacity-100" : "opacity-70 hover:opacity-100"
+              "text-sm uppercase tracking-wider font-medium relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:origin-center after:scale-x-0 after:transition-transform hover:after:scale-x-100",
+              activeSection === 'home' ? "opacity-100 after:scale-x-100" : "opacity-70 hover:opacity-100"
             )}
           >
             Главная
@@ -77,8 +93,8 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
           <Link
             to="/contacts"
             className={cn(
-              "link-underline text-sm uppercase tracking-wider font-medium",
-              activeSection === 'contacts' ? "opacity-100" : "opacity-70 hover:opacity-100"
+              "text-sm uppercase tracking-wider font-medium relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:origin-center after:scale-x-0 after:transition-transform hover:after:scale-x-100",
+              activeSection === 'contacts' ? "opacity-100 after:scale-x-100" : "opacity-70 hover:opacity-100"
             )}
           >
             Контакты
@@ -87,7 +103,7 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
           {isAuthenticated ? (
             <button
               onClick={handleLogout}
-              className="link-underline text-sm uppercase tracking-wider font-medium opacity-70 hover:opacity-100"
+              className="text-sm uppercase tracking-wider font-medium opacity-70 hover:opacity-100 relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:origin-center after:scale-x-0 after:transition-transform hover:after:scale-x-100"
             >
               Выйти
             </button>
@@ -95,8 +111,8 @@ const Header = ({ activeSection, onSectionChange, isAuthenticated }: HeaderProps
             <Link
               to="/login"
               className={cn(
-                "link-underline text-sm uppercase tracking-wider font-medium",
-                activeSection === 'login' || activeSection === 'register' ? "opacity-100" : "opacity-70 hover:opacity-100"
+                "text-sm uppercase tracking-wider font-medium relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:origin-center after:scale-x-0 after:transition-transform hover:after:scale-x-100",
+                activeSection === 'login' || activeSection === 'register' ? "opacity-100 after:scale-x-100" : "opacity-70 hover:opacity-100"
               )}
             >
               Войти

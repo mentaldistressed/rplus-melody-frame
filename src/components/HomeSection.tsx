@@ -73,21 +73,12 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
                 </h2>
                 <h1 
                   className={cn(
-                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0 font-montserrat tracking-tight bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent",
+                    "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold opacity-0 font-montserrat tracking-tight",
                     isLoaded && "animate-slide-up animate-delay-100"
                   )}
                 >
-                  rplus
+                  <span className="bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent">rplus</span>
                 </h1>
-                {/* <p 
-                  className={cn(
-                    "text-lg md:text-xl opacity-0 leading-relaxed text-gray-700",
-                    isLoaded && "animate-slide-up animate-delay-200"
-                  )}
-                >
-                  Профессиональная запись, продюсирование и продвижение 
-                  <span className="hidden sm:inline"> талантливых</span> музыкантов
-                </p> */}
               </div>
               
               <div 
@@ -131,8 +122,8 @@ const HomeSection = ({ isActive }: HomeSectionProps) => {
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 z-10 flex items-center justify-center">
                   <div className="relative w-3/5 h-3/5">
-                    <div className="rounded-full overflow-hidden bg-white shadow-2xl p-8 animate-pulse-slow">
-                      <Logo size="large" className="w-full h-full object-contain" />
+                    <div className="rounded-full overflow-hidden bg-white shadow-2xl p-8 animate-float">
+                      <Logo size="large" className="w-full h-full object-contain transform transition-transform hover:scale-105 duration-700" />
                     </div>
                   </div>
                 </div>
